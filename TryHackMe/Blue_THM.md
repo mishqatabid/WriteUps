@@ -4,10 +4,10 @@ Platform: TryHackMe
 Difficulty: Easy
 ```
 
-##WALKTHROUGH:
+## WALKTHROUGH:
 The machine can be found [here](https://tryhackme.com/r/room/blue)
 
-###Reconnaissance:
+### Reconnaissance:
 Let start with the Nmap Vulnerability Scan using following command `sudo nmap -sV -sC -vv --script vuln $IP
 
 ```console
@@ -104,7 +104,7 @@ Nmap done: 1 IP address (1 host up) scanned in 230.84 seconds
 
 This scan depicts that the machine is vulnerable to `ms17-010`
 
-###Exploitation
+### Exploitation
 
 We will use `msfconsole` for exploitation
 
@@ -275,7 +275,7 @@ msf6 exploit(windows/smb/ms17_010_eternalblue) > exploit
 meterpreter > 
 
 ```
-###Flags:
+### Flags:
 
 Use `shell` command to open the standard terminal on the target host.
 
@@ -334,5 +334,5 @@ flag{admin_documents_can_be_valuable}
 **Flag:** `flag{admin_documents_can_be_valuable}`
 
 ---
-##Happy Hacking ;)
+## Happy Hacking ;)
 ---

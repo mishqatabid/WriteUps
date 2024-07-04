@@ -8,7 +8,7 @@ Difficulty: Easy
 The machine can be found [here](https://tryhackme.com/r/room/blue)
 
 ### Reconnaissance:
-Let start with the Nmap Vulnerability Scan using following command `sudo nmap -sV -sC -vv --script vuln $IP
+Let start with the Nmap Vulnerability Scan using following command `sudo nmap -sV -sC -vv --script vuln $IP`
 
 ```console
 ┌──(kali@kali)-[~/Machine/THM/Blue]

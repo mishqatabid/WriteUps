@@ -126,7 +126,12 @@ This scan depicts that the machine has a directory of `/robots.txt`
 ```
 
 Now Let's access the `robots.txt` from the browser `http://10.10.117.31/robots.txt` 
-![image](https://github.com/mishqatabid/WriteUps/assets/145700715/8878b304-8f21-4651-9900-8f44d07e44a2)
+
+![Screenshot 2024-07-06 212115](https://github.com/mishqatabid/WriteUps/assets/145700715/c8040845-35bc-4f00-b9c5-3846feedcf5b)
+
+The directory shows the further directories and the `password` at the top i.e. `UmbracoIsTheBest!`
+
+Now after directory hunting and analyzing it, I have came across a directory in a which a 
 
 ---
 ## Happy Hacking ;)

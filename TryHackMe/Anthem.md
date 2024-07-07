@@ -7,7 +7,7 @@ Difficulty: Easy
 ## WALKTHROUGH:
 The machine can be found [here](https://tryhackme.com/r/room/anthem)
 
-### Reconnaissance:
+### Web Analysis:
 Let start with the Nmap Vulnerability Scan using following command `sudo nmap -sV -sC -vv --script vuln $IP`
 
 ```console
@@ -114,7 +114,14 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 399.15 seconds
 ```
 
-This scan depicts that the machine has a directory of `/robots.txt`
+The scan gives the answer to 2nd and 3rd questions.
+Port 80 is open which shoes that there is a webpage. Upon accessing it, domain is shown in the front. 
+
+![Screenshot 2024-07-07 171237](https://github.com/mishqatabid/WriteUps/assets/145700715/5867b6a4-cac0-44eb-a2bc-c0f006bef302)
+
+_Q. 4: What is a possible password in one of the pages web crawlers check for?_
+
+Analyzing the nmap scan results, we came across a directory of `/robots.txt`
 
 ```console
 | http-enum: 
@@ -131,7 +138,63 @@ Now Let's access the `robots.txt` from the browser `http://10.10.117.31/robots.t
 
 The directory shows the further directories and the `password` at the top i.e. `UmbracoIsTheBest!`
 
-Now after directory hunting and analyzing it, I have came across a directory in a which a 
+As we saw the `robots.txt`, the CMS used by the website is `umbraco`.
+
+In the website, there are 2 blogs written by user Jane Doe. In second one, there was a poem written. I searched it on Google and came across a nursery rhyme. There, the name was visible that was of Admin.
+
+![Screenshot 2024-07-06 220306](https://github.com/mishqatabid/WriteUps/assets/145700715/2bc1226d-0786-429b-8864-c692da6c0791)
+
+In the other article, an email was given. Using its format and the name of the admin, I got to know the email address of admin.
+
+![Screenshot 2024-07-06 221021](https://github.com/mishqatabid/WriteUps/assets/145700715/31886020-5cb7-4108-9497-ed180babc5ed)
+
+**Admin Email:** `SG@anthem.com`
+
+### Spot the Flags:
+
+I was able to get 3 of  the flags by analyzing the source code of the html pages.
+
+![Screenshot 2024-07-06 215903](https://github.com/mishqatabid/WriteUps/assets/145700715/e2868e98-1653-4df5-80d1-69de7af1f966)
+
+![Screenshot 2024-07-06 220222](https://github.com/mishqatabid/WriteUps/assets/145700715/554b8bfa-fedd-46a3-b36f-f247b2be2f42)
+
+![Screenshot 2024-07-06 215957](https://github.com/mishqatabid/WriteUps/assets/145700715/ea776994-7916-44a9-ad31-f4444f541efd)
+
+Now to find the final flag, I opened the profile of the author of the blog. The flag was written on that page.
+
+![Screenshot 2024-07-06 220908](https://github.com/mishqatabid/WriteUps/assets/145700715/7031cd59-7cee-4f8d-b44b-9b463bc8d643)
+
+### Final Stage:
+
+Now let's get into the box using the information that I have collected. I accessed the windows with SG as user using rdesktop command. Then provided password found earlier.
+
+```console
+rdesktop $IP
+```
+**User:** SG
+**Password:** UmbracoIsTheBest!
+
+![Screenshot 2024-07-06 224231](https://github.com/mishqatabid/WriteUps/assets/145700715/62171d7e-a685-4024-b59d-be89777349ea)
+
+There is a `user.txt` present. Upon opening it we get the flag.
+
+**User Flag:** `THM{N00T_NO0T}`
+
+For admin password, I changed the view setting to display `hidden files/directories`, and it displayed the `backup folder` that contains `restore.txt` but it requires privelege access to open. So. I changed the security permissions and gave read & write access, and got the password.
+
+![Screenshot 2024-07-06 223853](https://github.com/mishqatabid/WriteUps/assets/145700715/317cc6f4-c301-4fe7-89d6-8d82fd0cc06c)
+
+**Admin Password:** `ChangeMeBaby1MoreTime`
+
+Now login into to windows using the admin password.
+
+![Screenshot 2024-07-06 224332](https://github.com/mishqatabid/WriteUps/assets/145700715/e16add0e-c7a3-430e-bb0b-82d2d822a71b)
+
+After escalating privileges, I got the `root.txt` file and retrieved the final flag.
+
+![Screenshot 2024-07-06 224435](https://github.com/mishqatabid/WriteUps/assets/145700715/529e2f4c-6273-4ba7-97f8-c4b3376010ab)
+
+**Root Flag:** `THM{Y0U_4R3_1337}`
 
 ---
 ## Happy Hacking ;)

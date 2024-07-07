@@ -134,7 +134,8 @@ Analyzing the nmap scan results, we came across a directory of `/robots.txt`
 
 Now Let's access the `robots.txt` from the browser `http://10.10.117.31/robots.txt` 
 
-![Screenshot 2024-07-06 212115](https://github.com/mishqatabid/WriteUps/assets/145700715/c8040845-35bc-4f00-b9c5-3846feedcf5b)
+![1](https://github.com/mishqatabid/WriteUps/assets/145700715/d7c385e6-4c70-4ba2-a34e-b2dcf7b9e84e)
+
 
 The directory shows the further directories and the `password` at the top i.e. `UmbracoIsTheBest!`
 
@@ -142,11 +143,12 @@ As we saw the `robots.txt`, the CMS used by the website is `umbraco`.
 
 In the website, there are 2 blogs written by user Jane Doe. In second one, there was a poem written. I searched it on Google and came across a nursery rhyme. There, the name was visible that was of Admin.
 
-![Screenshot 2024-07-06 220306](https://github.com/mishqatabid/WriteUps/assets/145700715/2bc1226d-0786-429b-8864-c692da6c0791)
+![5](https://github.com/mishqatabid/WriteUps/assets/145700715/14b12582-88da-4d8a-b3ff-24e0d49ca58b)
+
 
 In the other article, an email was given. Using its format and the name of the admin, I got to know the email address of admin.
 
-![Screenshot 2024-07-06 221021](https://github.com/mishqatabid/WriteUps/assets/145700715/31886020-5cb7-4108-9497-ed180babc5ed)
+![7](https://github.com/mishqatabid/WriteUps/assets/145700715/4307fa33-b6c5-4f99-b72c-cded73616bf4)
 
 **Admin Email:** `SG@anthem.com`
 
@@ -156,21 +158,21 @@ I was able to get 3 of  the flags by analyzing the source code of the html pages
 
 _**Flag 1:**_ `THM{L0L_WH0_US3S_M3T4}`
 
-![Screenshot 2024-07-06 215903](https://github.com/mishqatabid/WriteUps/assets/145700715/e2868e98-1653-4df5-80d1-69de7af1f966)
+![2](https://github.com/mishqatabid/WriteUps/assets/145700715/25af384b-8d8d-41df-9ff2-ed31ac1e49ed)
 
 _**Flag2:**_ `THM{G!T_G00D}`
 
-![Screenshot 2024-07-06 220222](https://github.com/mishqatabid/WriteUps/assets/145700715/554b8bfa-fedd-46a3-b36f-f247b2be2f42)
+![4](https://github.com/mishqatabid/WriteUps/assets/145700715/eea5c484-8288-4160-aedd-05f54a5eb0c5)
 
 _**Flag 4:**_ `THM{AN0TH3R_M3TA}`
 
-![Screenshot 2024-07-06 215957](https://github.com/mishqatabid/WriteUps/assets/145700715/ea776994-7916-44a9-ad31-f4444f541efd)
+![3](https://github.com/mishqatabid/WriteUps/assets/145700715/13940687-11e9-40fc-9df3-dd56d4bbe3f5)
 
 Now to find the final flag, I opened the profile of the author of the blog. The flag was written on that page.
 
 _**Flag 3:**_ `THM{L0L_WH0_D15}`
 
-![Screenshot 2024-07-06 220908](https://github.com/mishqatabid/WriteUps/assets/145700715/7031cd59-7cee-4f8d-b44b-9b463bc8d643)
+![6](https://github.com/mishqatabid/WriteUps/assets/145700715/cb1fb366-a0fa-4e72-8104-a4c4e72817cf)
 
 ### Final Stage:
 
@@ -183,7 +185,7 @@ rdesktop $IP
 **User:** SG
 **Password:** UmbracoIsTheBest!
 
-![Screenshot 2024-07-06 224231](https://github.com/mishqatabid/WriteUps/assets/145700715/62171d7e-a685-4024-b59d-be89777349ea)
+![9](https://github.com/mishqatabid/WriteUps/assets/145700715/08fa756a-845a-4ce5-bd69-7ab46ae7233f)
 
 There is a `user.txt` present. Upon opening it we get the flag.
 
@@ -191,17 +193,17 @@ There is a `user.txt` present. Upon opening it we get the flag.
 
 For admin password, I changed the view setting to display `hidden files/directories`, and it displayed the `backup folder` that contains `restore.txt` but it requires privelege access to open. So. I changed the security permissions and gave read & write access, and got the password.
 
-![Screenshot 2024-07-06 223853](https://github.com/mishqatabid/WriteUps/assets/145700715/317cc6f4-c301-4fe7-89d6-8d82fd0cc06c)
+![8](https://github.com/mishqatabid/WriteUps/assets/145700715/acc46e15-1224-4233-a598-927a85236bcc)
 
 **Admin Password:** `ChangeMeBaby1MoreTime`
 
 Now login into to windows using the admin password.
 
-![Screenshot 2024-07-06 224332](https://github.com/mishqatabid/WriteUps/assets/145700715/e16add0e-c7a3-430e-bb0b-82d2d822a71b)
+![10](https://github.com/mishqatabid/WriteUps/assets/145700715/614c03bb-563f-4041-b281-0e435ff072a6)
 
 After escalating privileges, I got the `root.txt` file and retrieved the final flag.
 
-![Screenshot 2024-07-06 224435](https://github.com/mishqatabid/WriteUps/assets/145700715/529e2f4c-6273-4ba7-97f8-c4b3376010ab)
+![11](https://github.com/mishqatabid/WriteUps/assets/145700715/3a8a66c1-d0db-4da1-9912-f8381d6ee126)
 
 **Root Flag:** `THM{Y0U_4R3_1337}`
 

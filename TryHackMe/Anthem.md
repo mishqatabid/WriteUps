@@ -8,7 +8,7 @@ Difficulty: Easy
 The machine can be found [here](https://tryhackme.com/r/room/anthem)
 
 ### Web Analysis:
-Let start with the Nmap Vulnerability Scan using following command `sudo nmap -sV -sC -vv --script vuln $IP`
+Let start with the Nmap Vulnerability Scan using following command `sudo nmap -sV -sC -vv --script vuln $IP`.
 
 ```console
 ┌──(kali㉿kali)-[~]
@@ -155,17 +155,21 @@ In the other article, an email was given. Using its format and the name of the a
 I was able to get 3 of  the flags by analyzing the source code of the html pages.
 
 _**Flag 1:**_ `THM{L0L_WH0_US3S_M3T4}`
+
 ![Screenshot 2024-07-06 215903](https://github.com/mishqatabid/WriteUps/assets/145700715/e2868e98-1653-4df5-80d1-69de7af1f966)
 
 _**Flag2:**_ `THM{G!T_G00D}`
+
 ![Screenshot 2024-07-06 220222](https://github.com/mishqatabid/WriteUps/assets/145700715/554b8bfa-fedd-46a3-b36f-f247b2be2f42)
 
 _**Flag 4:**_ `THM{AN0TH3R_M3TA}`
+
 ![Screenshot 2024-07-06 215957](https://github.com/mishqatabid/WriteUps/assets/145700715/ea776994-7916-44a9-ad31-f4444f541efd)
 
 Now to find the final flag, I opened the profile of the author of the blog. The flag was written on that page.
 
 _**Flag 3:**_ `THM{L0L_WH0_D15}`
+
 ![Screenshot 2024-07-06 220908](https://github.com/mishqatabid/WriteUps/assets/145700715/7031cd59-7cee-4f8d-b44b-9b463bc8d643)
 
 ### Final Stage:
@@ -175,6 +179,7 @@ Now let's get into the box using the information that I have collected. I access
 ```console
 rdesktop $IP
 ```
+
 **User:** SG
 **Password:** UmbracoIsTheBest!
 

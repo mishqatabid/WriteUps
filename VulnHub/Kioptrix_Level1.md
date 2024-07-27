@@ -1,7 +1,7 @@
 (https://www.vulnhub.com/entry/kioptrix-level-1-1,22/)
 ```
 Machine: Kioptrix Level 1
-Platform: TryHackMe
+Platform: VulnHub
 Difficulty: Easy
 ```
 

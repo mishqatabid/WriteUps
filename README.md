@@ -9,4 +9,4 @@ This repository has all the writeups and walkthroughs of machines from all the p
 
 ## VulnHub
 
-- [Kiopatrix]
+- [Kioptrix](https://www.vulnhub.com/entry/kioptrix-level-1-1,22/)(https://github.com/mishqatabid/WriteUps/blob/main/VulnHub/Kioptrix_Level1.md)

@@ -99,7 +99,7 @@ So, I go back to the nmap scan results and look for other services and their ver
 msfconsole
 ```
 
-Here I searched for the “scanner smb” auxiliary module to scan the target and get the running version of the smb service.
+Here I searched for the `scanner smb` auxiliary module to scan the target and get the running version of the smb service.
 
 ```console
 ┌──(kali㉿kali)-[~]

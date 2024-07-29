@@ -317,7 +317,7 @@ Exploit target:
 View the full module info with the info, or info -d command.
 ```
 
-Then simply run the exploit and voilà!, I get the root shell.
+Then simply run the exploit and **voilà**!, I get the root shell.
 
 ```console
 msf6 exploit(linux/samba/trans2open) > exploit

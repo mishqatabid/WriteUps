@@ -174,7 +174,7 @@ Interact with a module by name or index. For example info 23, use 23 or use auxi
 
 ```
 
-Now I have found the scanner for the smb version which is module 20 for the list and then use it. Set the `RHOSTS  ` with the target IP `192.168.78.131` and then `run` the module.
+Now I have found the scanner for the smb version which is module 20 for the list and then use it. Set the `RHOSTS` with the target IP `192.168.78.131` and then `run` the module.
 
 ```console
 msf6 > use auxiliary/scanner/smb/smb_version

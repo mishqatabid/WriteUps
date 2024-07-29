@@ -7,6 +7,8 @@ Difficulty: Easy
 ## WALKTHROUGH:
 The machine can be found [here](https://www.vulnhub.com/entry/kioptrix-level-1-1,22/)
 
+### Network Discovery
+
 ### Reconnaissance:
 
 ---

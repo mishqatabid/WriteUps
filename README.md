@@ -8,8 +8,8 @@ This repository has all the writeups and walkthroughs of machines from all the p
 
 ## Hack The Box
 
-- [Academy](https://github.com/mishqatabid/WtiteUps/blob/main/HackTheBox/Academy)
-
+- [Academy](https://github.com/mishqatabid/WtiteUps/blob/main/HackTheBox/Academy.md)
+https://github.com/mishqatabid/WriteUp
 ## VulnHub
 
 - [Kioptrix](https://github.com/mishqatabid/WriteUps/blob/main/VulnHub/Kioptrix_Level1.md)

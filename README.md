@@ -8,7 +8,7 @@ This repository has all the writeups and walkthroughs of machines from all the p
 
 ## Hack The Box
 
-- [Academy](https://github.com/mishqatabid/WtiteUps/blob/main/)
+- [Academy](https://github.com/mishqatabid/WtiteUps/blob/main/Hack)
 
 ## VulnHub
 
